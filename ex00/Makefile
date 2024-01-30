@@ -2,7 +2,7 @@ NAME = bureaucrat
 
 CC = c++
 
-SRC = main.cpp Bureaucrat.cpp Bureaucrat.hpp
+SRC = main.cpp Bureaucrat.cpp
 
 OBJ	= $(SRC:.cpp=.o)
 
