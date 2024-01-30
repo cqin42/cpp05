@@ -6,7 +6,7 @@
 /*   By: christine <christine@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 16:59:11 by cqin              #+#    #+#             */
-/*   Updated: 2024/01/30 19:48:16 by christine        ###   ########.fr       */
+/*   Updated: 2024/01/30 19:19:56 by christine        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main()
 		bureaucrat.incrementGrade();
 		std::cout << bureaucrat.getName() << " ,bureaucrat grade " << bureaucrat.getGrade() << std::endl;
 
-		Bureaucrat bureaucratInvalid("invalid", 0); // throw
+		Bureaucrat bureaucrat("invalid", 0); // throw
 		//Bureaucrat bureaucrat("invalid", 151); // throw
 
 	}

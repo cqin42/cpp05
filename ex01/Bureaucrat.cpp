@@ -6,7 +6,7 @@
 /*   By: christine <christine@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 16:40:49 by cqin              #+#    #+#             */
-/*   Updated: 2024/01/30 20:05:46 by christine        ###   ########.fr       */
+/*   Updated: 2024/01/30 19:18:58 by christine        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat &autre): _name(autre.getName())
 	this->_grade = autre.getGrade();
 }
 
-Bureaucrat& Bureaucrat::operator=(Bureaucrat const &autre)
+Bureaucrat& Bureaucrat::operator=(const Bureaucrat &autre)
 {
 	std::cout << "Bureaucrat of operator = is called." << std::endl;
 	if (this != &autre)
