@@ -2,28 +2,28 @@
 #include "ShrubberyCreationForm.hpp"
 #include <fstream>
 
-ShrubberyCreationForm::ShrubberyCreationForm():_target("default")
+ShrubberyCreationForm::ShrubberyCreationForm(): AForm::AForm("default", 145, 137), _target("default")
 {
 	std::cout << "ShrubberyCreationForm Constructor called." << std::endl;
-	Aform(_target, 145, 137);
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target): _target(target)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target): AForm::AForm(target, 145, 137), _target(target)
 {
 	std::cout << "ShrubberyCreationForm Constructor with parameters called." << std::endl;
-	Aform(_target, 145, 137);
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &autre): _target(autre._target)
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &autre): AForm::AForm(autre._target, 145, 137)
 {
 	std::cout << "ShrubberyCreationForm Constructor of copy called." << std::endl;
+	this->_target = autre._target;
 	*this = autre;
 }
 
 
-ShrubberyCreationForm& ShrubberyCreationForm::operator=(ShrubberyCreationForm const &autre): _target(autre._target)
+ShrubberyCreationForm& ShrubberyCreationForm::operator=(ShrubberyCreationForm const &autre)
 {
 	std::cout << "ShrubberyCreationForm Constructor with operator = called." << std::endl;
+	this->_target = autre._target;
 	return *this;
 }
 
@@ -32,22 +32,23 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 	std::cout << "ShrubberyCreationForm Destructor called." << std::endl;
 }
 
-void ShrubberyCreationFor::execute(Bureaucrat const &executor) const
+void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
 	if (getGradeSigned() == false)
 		throw AForm::GradeNotSignedException();
 	else if (executor.getGrade() > getGradeExecute())
-		throw AForm::GradeTooLowException
+		throw AForm::GradeTooLowException();
 	if (executor.getGrade() <= getGradeExecute())
 	{
-		std::string filename = _target + _shrubbery;
-		std::ofstream outFile(filename);
+		std::string filename = _target + "_shrubbery";
+		std::ofstream outfile;
+		outfile.open(filename.c_str());
 
 		outfile << "    ###" << std::endl;
 		outfile << "   #o###" << std::endl;
 		outfile << " #####o###" << std::endl;
-		outfile << " #o#\#|#/###" << std::endl;
-		outfile << " ###\|/#o#" << std::endl;
+		outfile << " #o#\\#|#/###" << std::endl;
+		outfile << " ###\\|/#o#" << std::endl;
 		outfile << "  # }|{  #" << std::endl;
 		outfile << "    }|{" << std::endl;
 
