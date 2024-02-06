@@ -12,11 +12,9 @@ ShrubberyCreationForm::ShrubberyCreationForm(std::string target): AForm::AForm(t
 	std::cout << "ShrubberyCreationForm Constructor with parameters called." << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &autre): AForm::AForm(autre._target, 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &autre): AForm::AForm(autre._target, 145, 137), _target(autre._target)
 {
 	std::cout << "ShrubberyCreationForm Constructor of copy called." << std::endl;
-	this->_target = autre._target;
-	*this = autre;
 }
 
 
@@ -34,15 +32,16 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 
 void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
-	if (getGradeSigned() == false)
+	if (isSigned() == false)
+	{
 		throw AForm::GradeNotSignedException();
+	}
 	else if (executor.getGrade() > getGradeExecute())
 		throw AForm::GradeTooLowException();
 	if (executor.getGrade() <= getGradeExecute())
 	{
 		std::string filename = _target + "_shrubbery";
-		std::ofstream outfile;
-		outfile.open(filename.c_str());
+		std::ofstream outfile(filename.c_str());
 
 		outfile << "    ###" << std::endl;
 		outfile << "   #o###" << std::endl;
@@ -54,4 +53,10 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 
 		outfile.close();
 	}
+}
+
+std::ostream &operator<<(std::ostream &o, ShrubberyCreationForm const &shrubbery) {
+    o << "Shrubbery Creation Form: " << shrubbery.getName() << ", Signed: " << (shrubbery.isSigned() ? "Yes" : "No")
+      << ", Grade to Sign: " << shrubbery.getGradeSigned() << ", Grade to Execute: " << shrubbery.getGradeExecute() << std::endl;
+    return o;
 }

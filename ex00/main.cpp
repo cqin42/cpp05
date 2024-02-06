@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christine <christine@student.42.fr>        +#+  +:+       +#+        */
+/*   By: cqin <cqin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 16:59:11 by cqin              #+#    #+#             */
-/*   Updated: 2024/01/30 19:48:16 by christine        ###   ########.fr       */
+/*   Updated: 2024/02/06 12:34:04 by cqin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,17 @@
 
 int main()
 {
+	/*test avec des grades valides*/
 	try
 	{
-		Bureaucrat bureaucrat("test", 42);
-		std::cout << bureaucrat.getName() << " ,bureaucrat grade " << bureaucrat.getGrade() << std::endl;
-
-		bureaucrat.decrementGrade();
-		std::cout << bureaucrat.getName() << " ,bureaucrat grade " << bureaucrat.getGrade() << std::endl;
+		Bureaucrat bureaucrat("test", 50);
+		std::cout << bureaucrat << std::endl;
 
 		bureaucrat.incrementGrade();
-		std::cout << bureaucrat.getName() << " ,bureaucrat grade " << bureaucrat.getGrade() << std::endl;
+		std::cout << "Increment : " << bureaucrat << std::endl;
 
-		Bureaucrat bureaucratInvalid("invalid", 0); // throw
-		//Bureaucrat bureaucrat("invalid", 151); // throw
+		bureaucrat.decrementGrade();
+		std::cout << "Decrement : " << bureaucrat << std::endl;
 
 	}
 	catch(const std::exception& e)
@@ -34,4 +32,30 @@ int main()
 		std::cerr << e.what() << '\n';
 	}
 
+	std::cout << "--------------------------------------------" << std::endl;
+	/*test1 -> garde valid mais invalid lorsqu'on souhaite le increment*/
+	try
+	{
+		Bureaucrat test1("test1", 1);
+		std::cout << test1 << std::endl;
+
+		test1.incrementGrade();
+		std::cout << "Increment : " << test1 << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
+	std::cout << "--------------------------------------------" << std::endl;
+	/*test2 -> creer un bureaucrat invalid*/
+	try
+	{
+		Bureaucrat test2("test2", 160);
+		std::cout << test2 << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 }

@@ -7,14 +7,22 @@ Intern::Intern()
 
 Intern::Intern(const Intern &autre)
 {
+	(void)autre;
 	std::cout << "Intern Constructor of copy Called" << std::endl;
 }
 
 Intern &Intern::operator=(const Intern &autre)
 {
 	std::cout << "Intern Constructor of operator = Called" << std::endl;
+	if (this != &autre)
+		;
+	return (*this);
 }
 
+Intern::~Intern()
+{
+	std::cout << "Intern Destructor Called." << std::endl;
+}
 
 AForm *Intern::makeForm(std::string nameForm, std::string targetForm)
 {
@@ -24,20 +32,18 @@ AForm *Intern::makeForm(std::string nameForm, std::string targetForm)
 	{
 		if (nameForm == forms[i])
 		{
-			std::cout << "Intern creates " << targetForm << std::endl;
+			std::cout << "Intern creates " << nameForm << std::endl;
+			switch(i){
+				case 0:
+					return (new ShrubberyCreationForm(targetForm));
+				case 1:
+					return (new RobotomyRequestForm(targetForm));
+				case 2:
+					return (new PresidentialPardonForm(targetForm));
+				default:
+					break;
+			}
 
-			if (i == 0)
-			{
-				return (new ShrubberyCreationForm(targetForm));
-			}
-			else if (i == 1)
-			{
-				return (new RobotomyRequestForm(targetForm));
-			}
-			else
-			{
-				return (new PresidentialPardonForm(targetForm));
-			}
 		}
 	}
 

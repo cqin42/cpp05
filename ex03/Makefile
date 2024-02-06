@@ -1,4 +1,4 @@
-NAME = Aform
+NAME = Intern
 
 CC = c++
 

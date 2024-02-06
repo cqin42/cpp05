@@ -23,15 +23,17 @@ PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPard
 	return (*this);
 }
 
+PresidentialPardonForm::~PresidentialPardonForm()
+{
+	std::cout << "PresidentialPardonForm Destructor Called" << std::endl;
+}
 
 void	PresidentialPardonForm::execute(Bureaucrat const & executor) const
 {
-	if (getGradeSigned() == false)
+	if (isSigned() == false)
 		throw AForm::GradeNotSignedException();
 	else if (executor.getGrade() > getGradeExecute())
 		throw AForm::GradeTooLowException();
-	else if (rand() % 2 == 0)
-		std::cout << "drilling noises" << std::endl;
 	else
-		std::cout << "e robotomy failed" << std::endl;
+		std::cout << _target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }

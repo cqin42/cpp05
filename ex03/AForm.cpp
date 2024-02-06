@@ -6,7 +6,7 @@
 /*   By: cqin <cqin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 19:21:54 by christine         #+#    #+#             */
-/*   Updated: 2024/01/31 18:09:50 by cqin             ###   ########.fr       */
+/*   Updated: 2024/02/06 15:17:42 by cqin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,28 +80,28 @@ void	AForm::beSigned(const Bureaucrat &bureaucrat)
 		throw GradeTooLowException();
 }
 
-const char *AForm::GradeTooHighException::what() const throw()
+const char* AForm::GradeTooHighException::what() const throw()
 {
 	return ("Grade is too high for the AForm");
 }
 
-const char *AForm::GradeTooLowException::what() const throw()
+const char* AForm::GradeTooLowException::what() const throw()
 {
 	return ("Grade is too low for the AForm");
 }
 
 
-const char *AForm::GradeNotSignedException::what() const throw()
+const char* AForm::GradeNotSignedException::what() const throw()
 {
-	return ("Grade is not sign");
+	return ("Grade is not sign for AForm");
 }
 
 std::ostream &operator <<(std::ostream &o, AForm const &AForm)
 {
-	o<< "AForm Name : " << AForm.getName()
-	 << "\nIs Signed ? " << AForm.isSigned()
-	 << "\nAForm Signed :" << AForm.getGradeSigned()
-	 << "\nAForm Execute :" << AForm.getGradeExecute() << std::endl;
+	o<< "Form Name : " << AForm.getName()
+	 << " ,Is Signed ? " << AForm.isSigned()
+	 << " ,Form Signed :" << AForm.getGradeSigned()
+	 << " ,Form Execute :" << AForm.getGradeExecute() << std::endl;
 
 	return (o);
 }

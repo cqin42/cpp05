@@ -23,13 +23,28 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &a
 	return (*this);
 }
 
+RobotomyRequestForm::~RobotomyRequestForm()
+{
+	std::cout << "RobotomyRequestForm Destructor Called" << std::endl;
+}
+
 
 void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
-	if (getGradeSigned() == false)
+	srand(time(NULL));
+
+	if (isSigned() == false)
 		throw AForm::GradeNotSignedException();
 	else if (executor.getGrade() > getGradeExecute())
 		throw AForm::GradeTooLowException();
+	else if (rand() % 2 == 0)
+		std::cout << "drilling noises" << std::endl;
 	else
-		std::cout << _target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
+		std::cout << "robotomy failed" << std::endl;
+}
+
+std::ostream &operator<<(std::ostream &o, const RobotomyRequestForm &robotomy) {
+    o << "Robotomy Request Form: " << robotomy.getName() << ", Signed: " << (robotomy.isSigned() ? "Yes" : "No")
+      << ", Grade to Sign: " << robotomy.getGradeSigned() << ", Grade to Execute: " << robotomy.getGradeExecute() << std::endl;
+    return o;
 }

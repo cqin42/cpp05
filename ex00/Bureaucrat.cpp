@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: christine <christine@student.42.fr>        +#+  +:+       +#+        */
+/*   By: cqin <cqin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 16:40:49 by cqin              #+#    #+#             */
-/*   Updated: 2024/01/30 20:05:46 by christine        ###   ########.fr       */
+/*   Updated: 2024/02/06 11:38:01 by cqin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,9 @@ Bureaucrat::Bureaucrat(std::string const name, int grade): _name(name)
 {
 	std::cout << "Bureaucrat Constructor with parameters is called" << std::endl;
 	if (grade > 150)
-	{
-		throw GradeTooHighException();
-	}
-	else if (grade < 1)
-	{
 		throw GradeTooLowException();
-	}
+	else if (grade < 1)
+		throw GradeTooHighException();
 	else
 		this->_grade = grade;
 }
@@ -69,16 +65,32 @@ std::string	const Bureaucrat::getName() const
 
 void	Bureaucrat::incrementGrade()
 {
-	if (_grade < 150)
+	if (_grade > 1)
 		_grade -= 1;
 	else
-		throw GradeTooLowException();
+		throw GradeTooHighException();
 }
 
 void	Bureaucrat::decrementGrade()
 {
-	if (_grade > 1)
+	if (_grade < 150)
 		this->_grade += 1;
 	else
-		throw GradeTooHighException();
+		throw GradeTooLowException();
+}
+
+const char* Bureaucrat::GradeTooHighException::what() const throw()
+{
+	return ("Grade too high");
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return ("Grade to low");
+}
+
+std::ostream &operator <<(std::ostream &o, Bureaucrat const &bureaucrat)
+{
+	o<< bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << "." << std::endl;
+	return (o);
 }
